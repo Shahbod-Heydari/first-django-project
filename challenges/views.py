@@ -50,8 +50,20 @@ def day_num(request, num):
         day = allDays[num - 1]
         # return HttpResponseRedirect(f'/challenges/{day}') # this will send "http://127.0.0.1:8000/challenges/1" to "http://127.0.0.1:8000/challenges/saturday"
         # what if the prefix suddenly changed in the main app urls? we should make it dynamic
-        redirectURL = reverse("days-of-week", args = [day])
+        redirectURL = reverse("days-of-week", args = [day]) # args here just accepts a list that's why we use []
         return HttpResponseRedirect(redirectURL)
         # this the most dynamic it gets so it will work
         # if u change the main url it will send u to the sub url with days-of-week name no matter what is the main url
         # wether it's days-of-week/ or ahhf/ the reverse works 
+
+def deys_list(request):
+    days_list = list(days.keys())
+    allDays = ""
+    for day in days_list:
+        url_path = reverse("days-of-week", args = [day])
+        allDays += f'<li> <a href = "{url_path}"> {day} </a> </li>\n'
+        # now each day would be shown as a link to the path that has a name
+
+    content = f'<ul> {allDays} </ul>'
+    
+    return HttpResponse(content)

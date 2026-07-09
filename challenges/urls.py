@@ -3,6 +3,7 @@ from django.urls import path
 from . import views # . means this folder
 
 urlpatterns = [
+    path('',views.deys_list),
     path('sunday', views.index_sunday),# no () so we don't have to send request, we just write refrence and it sends request itself
     # it will connect the sunday address to the index function
     path('monday', views.index_monday),
