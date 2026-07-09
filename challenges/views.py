@@ -1,22 +1,13 @@
 from django.shortcuts import render 
 from django.http import HttpResponse , HttpResponseNotFound , HttpResponseRedirect 
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 # Create your views here.
 
 #first view
 #django will send the request itself
-def index_sunday(request):
-    return HttpResponse("this is sunday")
 
-def index_monday(request):
-    return HttpResponse("this is monday")
-
-def index_wednesday(request):
-    return HttpResponse("this is wednesday")
-
-def dynamic_url(request, word):
-    return HttpResponse(word)
 
 days = {
     'saturday' : 'this is saturday',
@@ -40,19 +31,24 @@ def deys_list(request):
     
     return HttpResponse(content)
 
-def dayToName_dynamic(request,day,name):
-    day_data = days.get(day)
-    if day_data is not None:
-        return HttpResponse(f'hi {name}, {day_data}')
-    
-    return HttpResponseNotFound('day not found')
 
-def day_dynamic(request,day):
-    day_data = days.get(day)
-    if day_data is not None:
-        return HttpResponse(f'hi {day_data}')
-    
-    return HttpResponseNotFound('day not found')
+
+def dynamic_url(request, word):
+    response = render_to_string('challenges/challenges.html') # using the template
+    return HttpResponse(response + word) # word will be shown under the template
+
+
+
+def index_sunday(request):
+    return HttpResponse("this is sunday")
+
+def index_monday(request):
+    return HttpResponse("this is monday")
+
+def index_wednesday(request):
+    return HttpResponse("this is wednesday")
+
+
 
 def day_num(request, num):
     allDays = list(days.keys())
@@ -67,3 +63,13 @@ def day_num(request, num):
         # this the most dynamic it gets so it will work
         # if u change the main url it will send u to the sub url with days-of-week name no matter what is the main url
         # wether it's days-of-week/ or ahhf/ the reverse works 
+
+
+
+def dayToName_dynamic(request,day,name):
+    day_data = days.get(day)
+    if day_data is not None:
+        return HttpResponse(f'hi {name}, {day_data}')
+    
+    return HttpResponseNotFound('day not found')
+

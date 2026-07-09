@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('challenges/', include('challenges.urls')), # introducing the challenges urls with the main challenges address
     # now i have the "http://127.0.0.1:8000/challenges/sunday" url 
-    # i don't have to write 'challenges/' here because we made it dynamic for the redirect
+    # 'challenges/' is the prefix added to all URLs in challenges.urls.
+    # reverse() automatically includes this prefix when generating the URL,
+    # so we don't have to hard-code 'challenges/' in the redirect.
     path('', views.index) # for the front page
 ]
