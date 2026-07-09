@@ -28,6 +28,18 @@ days = {
     'friday' : 'this is friday',
 }
 
+def deys_list(request):
+    days_list = list(days.keys())
+    allDays = ""
+    for day in days_list:
+        url_path = reverse("days-of-week", args = [day])
+        allDays += f'<li> <a href = "{url_path}"> {day} </a> </li>\n'
+        # now each day would be shown as a link to the path that has a name
+
+    content = f'<ul> {allDays} </ul>'
+    
+    return HttpResponse(content)
+
 def dayToName_dynamic(request,day,name):
     day_data = days.get(day)
     if day_data is not None:
@@ -55,15 +67,3 @@ def day_num(request, num):
         # this the most dynamic it gets so it will work
         # if u change the main url it will send u to the sub url with days-of-week name no matter what is the main url
         # wether it's days-of-week/ or ahhf/ the reverse works 
-
-def deys_list(request):
-    days_list = list(days.keys())
-    allDays = ""
-    for day in days_list:
-        url_path = reverse("days-of-week", args = [day])
-        allDays += f'<li> <a href = "{url_path}"> {day} </a> </li>\n'
-        # now each day would be shown as a link to the path that has a name
-
-    content = f'<ul> {allDays} </ul>'
-    
-    return HttpResponse(content)
