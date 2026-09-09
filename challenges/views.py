@@ -73,3 +73,21 @@ def dayToName_dynamic(request,day,name):
     
     return HttpResponseNotFound('day not found')
 
+
+
+def all_days(request):
+     return render(request,'challenges/challenges.html')
+
+
+
+def day_and_name_dyanmic(request,num,name):
+    allDays = list(days.keys())
+    if num > len(days):
+        return HttpResponseNotFound('less then 7 pls')
+    else:
+        day = allDays[num - 1]
+        contex = {
+            "day" : day,
+            "name": name
+        }
+        return render(request,'challenges/challenges2.html', contex)
