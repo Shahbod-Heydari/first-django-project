@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for day in days %}
+    <li><a href = '{% url 'days-of-week' day %}'>  {{day}} </a> <li>
+    {% endfor %}
+
+    <h1> <a href = '/challenges'> front page </a> <h1> <!--http://127.0.0.1:8000/challenges/-->
+    <h1> <a href = 'challenges/'> don't press </a> <h1> <!--http://127.0.0.1:8000/challenges/challenges/, this doesn't work--> 
+    <h1> <a href = 'challenges'> next page </a> <h1> <!--http://127.0.0.1:8000/challenges/challenges-->
+    <h1> <a href = '3/mohamad'> mohamad on monday </a> <h1> <!--http://127.0.0.1:8000/challenges/3/mohamad-->
+    <h1> <a href = '{{special}}'> special sunday </a> <h1> <!--http://127.0.0.1:8000/challenges/sunday-->
+
+    {% if year is None %}
+    <h1>no specific year determined<h1>
+    {% endif %}
+    
+    {% if month <= 4 %}
+    <h1>it's spring<h1>
+    {% elif month <= 6 %}
+    <h1>it's summer<h1>
+    {% else %}
+    <h1>second half of the year<h1>
+    {% endif %}
+
+</body>
+</html>

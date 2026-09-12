@@ -11,6 +11,7 @@ name for multiple apps there would be no problem-->
 </head>
 <body>
     <h1>this is first page</h1>
-    <h2>hi {{ name }}, this is for dynamic data and today is {{ day }}</h2>
+    <h2>hi {{ name | upper }}, this is for dynamic data and today is {{ day }}</h2>
+    <h3> {{ phrase | title }} <h3> <!-- title is a filter that upper cases the first letter of your words and lower cases the rest of them-->
 </body>
 </html>

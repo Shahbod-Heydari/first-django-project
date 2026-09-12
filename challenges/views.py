@@ -19,17 +19,29 @@ days = {
     'friday' : 'this is friday',
 }
 
-def deys_list(request):
-    days_list = list(days.keys())
-    allDays = ""
-    for day in days_list:
-        url_path = reverse("days-of-week", args = [day])
-        allDays += f'<li> <a href = "{url_path}"> {day} </a> </li>\n'
-        # now each day would be shown as a link to the path that has a name
+# def days_list(request):
+#     days_list = list(days.keys())
+#     allDays = ""
+#     for day in days_list:
+#         url_path = reverse("days-of-week", args = [day])
+#         allDays += f'<li> <a href = "{url_path}"> {day} </a> </li>\n'
+#         # now each day would be shown as a link to the path that has a name
 
-    content = f'<ul> {allDays} </ul>'
+#     content = f'<ul> {allDays} </ul>'
     
-    return HttpResponse(content)
+#     return HttpResponse(content)
+
+# days_list using templates
+def days_list(request):
+    days_list = list(days.keys())
+    context = {
+        "days": days_list,
+        "special": "sunday",
+        "year": None,
+        "month": 7
+    }
+
+    return render(request,'challenges/index.html',context)
 
 
 
@@ -88,6 +100,7 @@ def day_and_name_dyanmic(request,num,name):
         day = allDays[num - 1]
         contex = {
             "day" : day,
-            "name": name
+            "name": name,
+            "phrase" : "HOW IS YOUR DAY BY THE WAY?"
         }
         return render(request,'challenges/challenges2.html', contex)
