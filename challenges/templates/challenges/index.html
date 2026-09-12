@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block page_title %}document{% endblock %}
+
+{% block content %}
     {% for day in days %}
     <li><a href = '{% url 'days-of-week' day %}'>  {{day}} </a> <li>
     {% endfor %}
@@ -19,7 +16,7 @@
     {% if year is None %}
     <h1>no specific year determined<h1>
     {% endif %}
-    
+
     {% if month <= 4 %}
     <h1>it's spring<h1>
     {% elif month <= 6 %}
@@ -27,6 +24,4 @@
     {% else %}
     <h1>second half of the year<h1>
     {% endif %}
-
-</body>
-</html>
+{% endblock  %}

@@ -1,17 +1,11 @@
-<!-- we used html:5 to create all the base -->
-<!-- we put this file in a sub folder with the same name of the app so that if we have multiple html files with the same
-name for multiple apps there would be no problem-->
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> days info </title>
-</head>
-<body>
+{% block page_title %} days info {% endblock page_title %}
+
+{% block content %}
+    {% include "challenges/includes/header.html" with active_page="filter usage" %}
     <h1>this is first page</h1>
     <h2>hi {{ name | upper }}, this is for dynamic data and today is {{ day }}</h2>
     <h3> {{ phrase | title }} <h3> <!-- title is a filter that upper cases the first letter of your words and lower cases the rest of them-->
-</body>
-</html>
+{% endblock content %}
+ 
